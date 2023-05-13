@@ -53,7 +53,6 @@ if (sessionStorage.getItem('minute') == minute){
     }
 }else{
     data = getData(url);
-    console.log('la data');
     sessionStorage.setItem('minute',minute);
 };
 

@@ -1,0 +1,13 @@
+.row{
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+}
+.column{
+    text-align: center;
+    vertical-align: middle;
+}
+img{
+    border-radius: 50%;
+    height: 90px;
+}
