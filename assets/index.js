@@ -9,6 +9,9 @@ const getData = async (url) => {
         const data = info.data;
         console.log(data);
         sessionStorage.setItem('Datos', JSON.stringify(data));
+        for(let i=0;i < 6;i++){
+            addRow('dataTable', data[i]);
+        }
     }
     catch{
         handleError;
@@ -19,18 +22,41 @@ function handleError(err) {
     console.log(err);
     contentH1.textContent = `Algo salió mal: ${err}` //n no estaba definido
 }
+function addRow(containerId,data){
+    const container = document.getElementById(containerId);
+    const row = document.createElement('div');
+    row.classList.add('row');
+    
+    row.innerHTML = `
+    <div class="col-1">${data.id}</div>
+    <div class="col-2">${data.first_name}</div>
+    <div class="col-2">${data.last_name}</div>
+    <div class="col-5">${data.email}</div>
+    <div class="col-2" '>
+    <img src='${data.avatar}' alt=''>
+    </div>
+    `;
+
+    container.appendChild(row);
+}
 
 const date = new Date();
 const minute = date.getMinutes();
 console.log(minute);
 
+let data = {}
+
 if (sessionStorage.getItem('minute') == minute){
-    const data = JSON.parse(sessionStorage.getItem('Datos'));
-    console.log(data)
+    data = JSON.parse(sessionStorage.getItem('Datos'));
+    for(let i=0;i < 6;i++){
+        addRow('dataTable', data[i]);
+    }
 }else{
-    const data = getData(url)
-    console.log('la data')
-    console.log(data)
+    data = getData(url);
+    console.log('la data');
     sessionStorage.setItem('minute',minute);
-}
+};
+
+
+
 
